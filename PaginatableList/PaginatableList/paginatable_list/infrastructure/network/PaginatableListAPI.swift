@@ -9,6 +9,8 @@
 import RxSwift
 import RxCocoa
 
+let perPage = 100
+
 struct Response {
     let list: [String]
     let pagination: Pagination
@@ -19,17 +21,17 @@ struct Pagination {
 }
 
 protocol PaginatableListAPI {
-    func request() -> Single<Response>
+    func request(with pagination: Pagination?) -> Single<Response>
 }
 
 class PaginatableListMockAPI: PaginatableListAPI {
-    func request() -> Single<Response> {
-        // TODO: しっかり連打対策しなきゃならない
-        // TODO: Threadによるブロック処理もまともにやってない
+    func request(with pagination: Pagination? = nil) -> Single<Response> {
+        let page = (pagination?.page ?? 0)
+        let base = page * perPage
         return Single.just(
             Response(
-                list: (0..<10).map{ String($0) }, // TODO: ページに合わせたデータを返す
-                pagination: Pagination(page: 1) // TODO: 次のページを返す
+                list: (base..<base+perPage).map{ String($0) },
+                pagination: Pagination(page: page + 1)
             )
         )
     }

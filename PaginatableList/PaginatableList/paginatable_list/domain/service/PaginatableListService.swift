@@ -21,7 +21,7 @@ class PaginatableListService {
     private let api: PaginatableListAPI = PaginatableListMockAPI()
 
     func load(withState state: State, reload: Bool = false) -> Single<State> {
-        return api.request() // TODO: state.paginationを反映させる
+        return api.request(with: state.pagination)
             .map({ response -> State in
                 State(
                     list: reload ? response.list : state.list + response.list,

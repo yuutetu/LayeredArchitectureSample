@@ -28,8 +28,7 @@ class PaginatableListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // next page Request
-        if indexPath.row >= serviceState.list.count - 2 {
-            // TODO: 連打対策していないため、すばやくスクロールしたら二重でリクエストされる・・・
+        if indexPath.row >= serviceState.list.count - 5 {
             service.load(withState: serviceState).subscribe(onSuccess: { [weak self] state in
                 self?.serviceState = state
                 self?.tableView.reloadData() // TODO: DifferenceKitでいい感じにする
