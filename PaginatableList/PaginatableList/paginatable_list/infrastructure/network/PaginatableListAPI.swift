@@ -6,12 +6,31 @@
 //  Copyright © 2019 yuutetu. All rights reserved.
 //
 
-class PaginatableListAPI {
-    init() {
+import RxSwift
+import RxCocoa
 
-    }
+struct Response {
+    let list: [String]
+    let pagination: Pagination
+}
 
-    func request() {
+struct Pagination {
+    let page: Int
+}
 
+protocol PaginatableListAPI {
+    func request() -> Single<Response>
+}
+
+class PaginatableListMockAPI: PaginatableListAPI {
+    func request() -> Single<Response> {
+        // TODO: しっかり連打対策しなきゃならない
+        // TODO: Threadによるブロック処理もまともにやってない
+        return Single.just(
+            Response(
+                list: (0..<10).map{ String($0) }, // TODO: ページに合わせたデータを返す
+                pagination: Pagination(page: 1) // TODO: 次のページを返す
+            )
+        )
     }
 }

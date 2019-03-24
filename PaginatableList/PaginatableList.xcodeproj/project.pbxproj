@@ -16,6 +16,7 @@
 		20A4498A22477C9700D65609 /* PaginatableListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A4498922477C9700D65609 /* PaginatableListTableViewController.swift */; };
 		20A4498C22477CE900D65609 /* PaginatableListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20A4498B22477CE900D65609 /* PaginatableListTableViewController.storyboard */; };
 		20A4499222478ED200D65609 /* PaginatableListAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A4499122478ED200D65609 /* PaginatableListAPI.swift */; };
+		20A449952247A1F100D65609 /* PaginatableListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A449942247A1F100D65609 /* PaginatableListService.swift */; };
 		4718A7577F2DA013C1FF4943 /* Pods_PaginatableListUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA2854024D9634B57B4171B /* Pods_PaginatableListUITests.framework */; };
 		B833B30F42E843B2B50236E4 /* Pods_PaginatableListTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88685DB1D69CF009CFF6624F /* Pods_PaginatableListTests.framework */; };
 		EB8B16143A1E4D7BC86DE3B0 /* Pods_PaginatableList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237CE2A926CD6834D1E747F0 /* Pods_PaginatableList.framework */; };
@@ -54,6 +55,7 @@
 		20A4498922477C9700D65609 /* PaginatableListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatableListTableViewController.swift; sourceTree = "<group>"; };
 		20A4498B22477CE900D65609 /* PaginatableListTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PaginatableListTableViewController.storyboard; sourceTree = "<group>"; };
 		20A4499122478ED200D65609 /* PaginatableListAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatableListAPI.swift; sourceTree = "<group>"; };
+		20A449942247A1F100D65609 /* PaginatableListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatableListService.swift; sourceTree = "<group>"; };
 		237CE2A926CD6834D1E747F0 /* Pods_PaginatableList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaginatableList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA2854024D9634B57B4171B /* Pods_PaginatableListUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaginatableListUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		875C292565EF2C4FFDC2EF3D /* Pods-PaginatableListTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaginatableListTests.release.xcconfig"; path = "Target Support Files/Pods-PaginatableListTests/Pods-PaginatableListTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -159,23 +161,24 @@
 		20A4498722477C4F00D65609 /* presentation */ = {
 			isa = PBXGroup;
 			children = (
-				20A4498822477C7800D65609 /* views */,
+				20A4498822477C7800D65609 /* view */,
 			);
 			path = presentation;
 			sourceTree = "<group>";
 		};
-		20A4498822477C7800D65609 /* views */ = {
+		20A4498822477C7800D65609 /* view */ = {
 			isa = PBXGroup;
 			children = (
 				20A4498922477C9700D65609 /* PaginatableListTableViewController.swift */,
 				20A4498B22477CE900D65609 /* PaginatableListTableViewController.storyboard */,
 			);
-			path = views;
+			path = view;
 			sourceTree = "<group>";
 		};
 		20A4498D22478B5500D65609 /* domain */ = {
 			isa = PBXGroup;
 			children = (
+				20A449932247A1CA00D65609 /* service */,
 			);
 			path = domain;
 			sourceTree = "<group>";
@@ -194,6 +197,14 @@
 				20A4499122478ED200D65609 /* PaginatableListAPI.swift */,
 			);
 			path = network;
+			sourceTree = "<group>";
+		};
+		20A449932247A1CA00D65609 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				20A449942247A1F100D65609 /* PaginatableListService.swift */,
+			);
+			path = service;
 			sourceTree = "<group>";
 		};
 		8A581D34DA5D7253C1836C32 /* Frameworks */ = {
@@ -216,7 +227,6 @@
 				AA0EFF71E40841A77CB51F21 /* Pods-PaginatableListUITests.debug.xcconfig */,
 				E9BEA3C76FE5A4E9A2A9DC2D /* Pods-PaginatableListUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -453,6 +463,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20A449952247A1F100D65609 /* PaginatableListService.swift in Sources */,
 				20A4498A22477C9700D65609 /* PaginatableListTableViewController.swift in Sources */,
 				20A4499222478ED200D65609 /* PaginatableListAPI.swift in Sources */,
 				20A4495722477BA100D65609 /* AppDelegate.swift in Sources */,
