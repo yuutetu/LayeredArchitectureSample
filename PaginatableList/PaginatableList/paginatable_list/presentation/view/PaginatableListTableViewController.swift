@@ -8,9 +8,23 @@
 
 import UIKit
 import RxSwift
+import DifferenceKit
+
+// ひとまず簡単のために・・・
+extension String: Differentiable {}
 
 class PaginatableListTableViewController: UITableViewController {
-    private var serviceState = PaginatableListService.State.initialize()
+    private var items: [String] = []
+    // TODO: ここをPaginatableListTableViewControllerから見れないようにしたい
+    private var serviceState = PaginatableListService.State.initialize() {
+        didSet {
+            let changeset = StagedChangeset<[String]>(source: oldValue.list, target: serviceState.list)
+            // TODO: なぜか2ページ目移行が追加できない？
+            tableView.reload(using: changeset, with: .fade) { [weak self] (items) in
+                self?.items = items
+            }
+        }
+    }
     private let service = PaginatableListService()
     private let disposeBag = DisposeBag()
 
@@ -18,25 +32,23 @@ class PaginatableListTableViewController: UITableViewController {
         super.viewDidLoad()
         service.load(withState: serviceState, reload: true).subscribe(onSuccess: { [weak self] state in
             self?.serviceState = state
-            self?.tableView.reloadData() // TODO: DifferenceKitでいい感じにする
         }).disposed(by: disposeBag)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return serviceState.list.count
+        return items.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // next page Request
-        if indexPath.row >= serviceState.list.count - 5 {
+        if indexPath.row >= items.count - 5 {
             service.load(withState: serviceState).subscribe(onSuccess: { [weak self] state in
                 self?.serviceState = state
-                self?.tableView.reloadData() // TODO: DifferenceKitでいい感じにする
             }).disposed(by: disposeBag)
         }
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
-        cell.textLabel?.text = serviceState.list[indexPath.row]
+        cell.textLabel?.text = items[indexPath.row]
         return cell
     }
 }
